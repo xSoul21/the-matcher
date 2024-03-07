@@ -32,7 +32,7 @@ Comparison on primitives, should be ignore a value
 |-----------------|-------------------|
 | {"data":•true•} | {"data":•"true"•} |
 
-In this case should be possibile to define that two objects  are equals
+In this case should be possible to define that two objects  are equals
 
 | left                                  | right             |
 |---------------------------------------|-------------------|
