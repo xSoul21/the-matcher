@@ -1,0 +1,23 @@
+Scopo della libreria
+Lo scopo è quello di fornire una libreria che in input accetti due json ed in output torni una lista di differenze.
+Il confronto deve avvenire in base ad alcune configurazioni ( personalizzazioni ) passate alla libreria.
+
+Possibili configurazioni :
+ -  gestire il confronto tra array in base al loro significato :
+        - confrontarli in base alla loro posizione (indice)
+        - confrontarli in base al contenuto dell'elemento dell'array
+        - confrontarli in base ad un insieme di chiavi ricavabili dall'elemento dell'array ( sempre che l'elemento dell'array sia un oggetto o un array )
+{ name:"mario",
+  mio:[1,true,{prop:"2"}],
+  cognome:"Uncino"
+}
+Caso Oggetti
+L'ordinamento delle proprietà degli oggetti JSON non viene considerato ai fini delle differenze
+
+{nome:"Mario",cognome:"Rossi"}
+{cognome:"Rossi",nome:"Mario"}
+0 diff
+
+
+
+[,"ciao",true,null,1,{},[]]
