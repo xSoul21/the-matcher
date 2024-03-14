@@ -4,9 +4,33 @@ Il confronto deve avvenire in base ad alcune configurazioni ( personalizzazioni 
 
 Possibili configurazioni :
  -  gestire il confronto tra array in base al loro significato :
-        - confrontarli in base alla loro posizione (indice)
-        - confrontarli in base al contenuto dell'elemento dell'array
-        - confrontarli in base ad un insieme di chiavi ricavabili dall'elemento dell'array ( sempre che l'elemento dell'array sia un oggetto o un array )
+        - confrontarli in base alla loro posizione ( chiave uguale ad  indice) index
+        - confrontarli in base al contenuto dell'elemento dell'array ( chiave uguale all'intero oggetto/primitivo) whole
+        - confrontarli in base ad un insieme di chiavi ricavabili dall'elemento dell'array ( chiave uguale a campi singoli ) ( sempre che l'elemento dell'array sia un oggetto o un array ) custom keys
+        - confrontarli in base a dei parametri custom
+- gestire la possibilità di decidere di come confrontare gli elementi dell'array al primo livello :
+       - possibilità di utilizzare/ignorare degli indici specifici ( blacklist/whitelist)
+       - possibilità di poter filtrare gli elementi in base al contenuto ( ad es. filtrare tutti gli elementi con oggetti che hanno un certo campo ) whitelist/blacklist
+       - possibilità di filtrare l'array con elementi decisi in maniera personalizzata ( tramite JSONPath)
+- gestire la possibilità di controllare se il confronto deve fermarsi ad un certo numero di differenze o una certa differenza.
+
+ - Avere la possibilità di decidere su quali oggetti andare a confrontare (es. confrontare solo un certo array o solo certi oggetti ).whitelist
+ - Avere la possibilità di escludere oggetti su cui fare il confronto  -blacklist
+
+[ {n:mario,c:rossi,p:[{x:0,y:0},1,true]},1,2,true,"ciccio"] ["ciccio",true,1,2,{n:mario,c:rossi},"parola"]
+
+
+
+
+[ {n:mario,c:rossi},1,2,true,"ciccio"] ["ciccio",true,1,2,{n:mario,c:rossi},"parola"]
+ 1) filtro prendi solo oggetti numeri e bool
+ [ {n:mario,c:rossi},1,2,true] [true,1,2,{n:mario,c:rossi}]
+ 2) confrontali con algo 2
+
+[ {n:mario,c:rossi},1,2,true,"ciccio"] ["ciccio",true,1,2,{n:mario,c:rossi},"parola"]
+1) diff
+2) uguale
+3) [mario,
 { name:"mario",
   mio:[1,true,{prop:"2"}],
   cognome:"Uncino"

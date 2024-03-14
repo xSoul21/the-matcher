@@ -1,0 +1,16 @@
+[ {n:mario,c:rossi,p:[{x:0,y:0},1,true]},1,2,true,"ciccio"] ["ciccio",true,1,2,{n:mario,c:rossi},"parola"]
+Vogliamo escludere le stringhe al primo livello, utilizzare come algoritmo whole
+Come output ottenere :
+1) [ {"n":"mario","c":"rossi","p":[{"x":0,"y":0},1,true]},1,2,true] [true,1,2,{n:mario,c:rossi}] elimina stringhe
+2)  ["{n:mario,c:rossi,p:[{x:0,y:0},1,true]}","1","2","true"] ["true","1","2","{n:mario,c:rossi}"] crea chiavi
+3) chiave  "{n:mario,c:rossi,p:[{x:0,y:0},1,true]}" trovata solo a sx /0
+   chiave "{n:mario,c:rossi}" trovata solo a dx /4
+
+config:
+    - object: primoArray
+      path: /
+      alg: whole
+      filters:
+        - $[?(!(@ == "parola"))]
+        - $[?(!(@ == "ciccio"))]
+
