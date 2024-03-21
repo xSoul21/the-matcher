@@ -6,9 +6,16 @@ Come output ottenere :
 3) chiave  "{n:mario,c:rossi,p:[{x:0,y:0},1,true]}" trovata solo a sx /0
    chiave "{n:mario,c:rossi}" trovata solo a dx /4
 
+
 config:
-    - object: primoArray
-      path: /
+    - label: nomeRegola // nome regola
+      path:
+          regexp:
+            - firstRegexp
+            - secondRegexp
+          jsonPath:
+            - firstJSONPath
+            - secondJSONPath
       alg: whole
       filters:
         - $[?(!(@ == "parola"))]

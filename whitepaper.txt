@@ -45,3 +45,49 @@ L'ordinamento delle proprietà degli oggetti JSON non viene considerato ai fini 
 
 
 [,"ciao",true,null,1,{},[]]
+
+
+Possibile oggetto di configurazione :
+config:
+  - label: nomeRegola
+    path: #/a
+      regexp: #Sono in OR l'una con l'altra. Quindi la regola vale per questo path se il path matcha la prima regex oppure la seconda.
+        - firstRegexp
+        - secondRegexp
+      jsonPath: #Incapsuliamo il valore della elemento nell'oggetto {"path": "/a","value": valoreElemento}. Se mi restituisce un oggetto vuoto => NoMatch altrimenti => Match
+        - "$[?(!(@ == \"parola\"))]"
+        - secondJSONPath
+
+    ifArray: #I filtri sugli array prendono in input l'array e vogliono un array di posizioni che sono quelle degli elementi su cui iteriamo
+      algorithmForCorrespondence: whole
+      filters:
+        - "$[?(!(@ == \"ciccio\"))]"
+        - "$[?(!(@ == \"parola\"))]"
+    ifObject: #I filtri sugli oggetti prendono in input l'oggetto e vogliono un array di field che sono quelli su cui iteriamo
+      filterOnKey: "^(parola)$"
+      filters:
+        - "$[?(!(@ == \"ciccio\"))]" #Da capire come fare
+    ifPrimitive: #I filtri sulle primitive prendono in input la primitiva e ci danno in output la primitiva se è da elaborare o niente se non è da elaborare
+      ifString:
+        exclude: true
+        filterWithRegex: "^contenutoX.*$"
+        filters: #Facciamo finta che sia un oggetto: incapsuliamo il valore della primitiva nell'oggetto {"primitive": valorePrimitiva}
+          - "$.primitive == 'true'" #Da capire come fare
+
+      ifBoolean: #Esclusivi
+        exclude: true
+        excludeIfValueIs: false
+
+      ifNumber:
+        exclude: true
+        filterWithRegex: "^contenutoX.*$"
+        filters: #Facciamo finta che sia un oggetto: incapsuliamo il valore della primitiva nell'oggetto {"primitive": valorePrimitiva}
+          - "$.primitive == 'true'" #Da capire come fare
+
+      ifNull:
+        exclude: true
+
+      exclude: true
+      filterWithRegex: "^contenutoX.*$"
+      filters: #Facciamo finta che sia un oggetto: incapsuliamo il valore della primitiva nell'oggetto {"primitive": valorePrimitiva}
+        - "$.primitive == 'true'" #Da capire come fare
